@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TOPC Fashion - অনলাইন পোশাক ও ফ্যাশন শপ">
+<title>TOPC | Fashion & Style</title>
+<style>
+:root{--ink:#111;--muted:#686868;--gold:#c5a15b;--cream:#f7f4ef;--line:#e9e4dc}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;color:var(--ink);background:#fff}
+header{background:#111;color:white;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:5;border-bottom:2px solid var(--gold)}
+.logo{font-size:27px;font-weight:800;letter-spacing:4px;color:var(--gold)}.tag{font-size:11px;color:#e5d2a8;letter-spacing:2px}
+nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{background:linear-gradient(110deg,rgba(0,0,0,.78),rgba(0,0,0,.18)),url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85') center/cover;min-height:390px;color:white;display:flex;align-items:center;padding:50px 8%}
+.hero h1{font-size:clamp(36px,7vw,66px);margin:0 0 12px;color:var(--gold)}.hero p{font-size:17px;max-width:460px;line-height:1.7}.btn{display:inline-block;background:var(--gold);color:#111;border:0;padding:13px 22px;text-decoration:none;font-weight:bold;cursor:pointer;border-radius:3px}
+section{padding:48px 6%}.heading{text-align:center;margin-bottom:28px}.heading h2{font-size:28px;margin:0 0 8px}.heading p{color:var(--muted);margin:0}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{border:1px solid var(--line);background:white}.product img{width:100%;height:230px;object-fit:cover;display:block}.product-info{padding:15px}.product h3{margin:0 0 7px;font-size:17px}.price{font-weight:bold;color:#98743a;margin:0 0 12px}
+.order{background:var(--cream)}form{max-width:680px;margin:auto;background:white;padding:24px;border:1px solid var(--line);border-radius:8px}
+label{display:block;font-weight:bold;font-size:14px;margin:14px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #d8d2c8;border-radius:4px;font:inherit;background:#fff}textarea{min-height:90px;resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px}
+footer{background:#111;color:#ddd;text-align:center;padding:28px 15px;font-size:14px;border-top:2px solid var(--gold)}footer strong{color:var(--gold);letter-spacing:3px}
+@media(max-width:700px){header{flex-wrap:wrap}nav{width:100%;display:flex;gap:14px;flex-wrap:wrap}nav a{margin:0}.hero{min-height:330px}.products{grid-template-columns:1fr 1fr}.product img{height:190px}section{padding:38px 5%}}
+@media(max-width:430px){.products{grid-template-columns:1fr 1fr}.product img{height:170px}.grid{grid-template-columns:1fr}.hero p{font-size:15px}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="logo">TOPC</div><div class="tag">FASHION & STYLE</div></div>
+  <nav><a href="#home">হোম</a><a href="#products">পণ্য</a><a href="#order">অর্ডার</a><a href="#contact">যোগাযোগ</a></nav>
+</header>
+<main>
+<section class="hero" id="home">
+  <div><h1>Discover Your Style</h1><p>ছেলে ও মেয়েদের পছন্দের পোশাক খুঁজে নিন TOPC-তে। আধুনিক ফ্যাশন, সুন্দর স্টাইল—সব এক জায়গায়।</p><a class="btn" href="#products">পণ্য দেখুন</a></div>
+</section>
+<section id="products">
+  <div class="heading"><h2>আমাদের কালেকশন</h2><p>ছেলে ও মেয়েদের ফ্যাশন কালেকশন</p></div>
+  <div class="products">
+    <article class="product"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="টি-শার্ট"><div class="product-info"><h3>ছেলেদের ক্যাজুয়াল টি-শার্ট</h3><p class="price">৳ ৫৫০</p><button class="btn" type="button" onclick="choose('ছেলেদের ক্যাজুয়াল টি-শার্ট')">অর্ডার করুন</button></div></article>
+    <article class="product"><img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80" alt="জিন্স"><div class="product-info"><h3>ছেলেদের ডেনিম জিন্স</h3><p class="price">৳ ১,২০০</p><button class="btn" type="button" onclick="choose('ছেলেদের ডেনিম জিন্স')">অর্ডার করুন</button></div></article>
+    <article class="product"><img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=700&q=80" alt="মেয়েদের ফ্যাশন পোশাক"><div class="product-info"><h3>মেয়েদের ফ্যাশন পোশাক</h3><p class="price">৳ ৯৫০</p><button class="btn" type="button" onclick="choose('মেয়েদের ফ্যাশন পোশাক')">অর্ডার করুন</button></div></article>
+    <article class="product"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80" alt="মেয়েদের ক্যাজুয়াল কালেকশন"><div class="product-info"><h3>মেয়েদের ক্যাজুয়াল কালেকশন</h3><p class="price">৳ ৮৫০</p><button class="btn" type="button" onclick="choose('মেয়েদের ক্যাজুয়াল কালেকশন')">অর্ডার করুন</button></div></article>
+  </div>
+</section>
+<section class="order" id="order">
+  <div class="heading"><h2>অর্ডার ফর্ম</h2><p>তথ্য পূরণ করে WhatsApp-এ অর্ডার পাঠান</p></div>
+  <form id="orderForm">
+    <div class="grid"><div><label for="name">আপনার নাম *</label><input id="name" required placeholder="সম্পূর্ণ নাম"></div><div><label for="phone">মোবাইল নম্বর *</label><input id="phone" required inputmode="tel" placeholder="01XXXXXXXXX"></div></div>
+    <label for="product">পণ্যের নাম *</label><select id="product" required><option value="">পণ্য নির্বাচন করুন</option><option>ছেলেদের ক্যাজুয়াল টি-শার্ট</option><option>ছেলেদের ডেনিম জিন্স</option><option>মেয়েদের ফ্যাশন পোশাক</option><option>মেয়েদের ক্যাজুয়াল কালেকশন</option><option>অন্যান্য</option></select>
+    <div class="grid"><div><label for="size">সাইজ</label><select id="size"><option>সিলেক্ট করুন</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>প্রযোজ্য নয়</option></select></div><div><label for="qty">পরিমাণ *</label><input id="qty" type="number" min="1" value="1" required></div></div>
+    <label for="address">সম্পূর্ণ ডেলিভারি ঠিকানা *</label><textarea id="address" required placeholder="বাড়ি/রোড, এলাকা, উপজেলা, জেলা"></textarea>
+    <label for="extra">অতিরিক্ত তথ্য (ঐচ্ছিক)</label><textarea id="extra" placeholder="রং বা অন্য কোনো পছন্দ"></textarea>
+    <button class="btn" type="submit">WhatsApp-এ অর্ডার পাঠান</button>
+    <p class="note">অর্ডার পাঠানোর বাটনে চাপ দিলে WhatsApp খুলবে এবং আপনার দেওয়া তথ্যসহ একটি বার্তা তৈরি হবে। বার্তাটি দেখে Send চাপলে অর্ডার যাবে।</p>
+  </form>
+</section>
+</main>
+<footer id="contact"><strong>TOPC</strong><p>FASHION & STYLE</p><p>আপনার স্টাইল, আপনার পছন্দ</p><p>অর্ডার ও যোগাযোগ: 01780520876</p></footer>
+<script>
+function choose(name){document.getElementById('product').value=name;document.getElementById('order').scrollIntoView({behavior:'smooth'})}
+document.getElementById('orderForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ const v=id=>document.getElementById(id).value;
+ const message=`TOPC-তে নতুন অর্ডার%0Aনাম: ${v('name')}%0Aক্রেতার মোবাইল: ${v('phone')}%0Aপণ্য: ${v('product')}%0Aসাইজ: ${v('size')}%0Aপরিমাণ: ${v('qty')}%0Aঠিকানা: ${v('address')}%0Aঅতিরিক্ত তথ্য: ${v('extra')}`;
+ const whatsappNumber='8801780520876';
+ window.open('https://wa.me/'+whatsappNumber+'?text='+encodeURIComponent(decodeURIComponent(message)),'_blank');
+});
+</script>
+</body>
+</html>
