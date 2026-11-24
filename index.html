@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOPC Fashion</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:white;font-family:Arial,sans-serif}
+header{text-align:center;padding:28px 12px;background:#000;border-bottom:2px solid #d4af37}
+h1{color:#d4af37;margin:0;font-size:38px}
+header p{color:#eee}
+nav{text-align:center;padding:14px}
+nav a{color:#d4af37;margin:10px;text-decoration:none}
+main{max-width:950px;margin:auto;padding:15px}
+h2{color:#d4af37}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.product{background:#202020;border:1px solid #b9972e;border-radius:10px;padding:18px;text-align:center}
+.product .emoji{font-size:65px}
+.price{color:#f1cd58;font-size:20px;font-weight:bold}
+button{background:#d4af37;color:#111;border:0;padding:12px 18px;border-radius:6px;font-weight:bold;cursor:pointer}
+form{background:#202020;padding:18px;border-radius:10px}
+input,select,textarea{width:100%;padding:12px;margin:8px 0 15px;border-radius:5px;border:1px solid #aaa;font-size:16px}
+label{color:#f1cd58}
+.contact{text-align:center;padding:25px}
+footer{text-align:center;background:#000;padding:20px;color:#d4af37}
+</style>
+</head>
+<body>
+<header>
+<h1>TOPC</h1>
+<p>ছেলে ও মেয়েদের ইউনিক ফ্যাশন কালেকশন</p>
+</header>
+<nav>
+<a href="#home">হোম</a>
+<a href="#products">পণ্য</a>
+<a href="#order">অর্ডার</a>
+<a href="#contact">যোগাযোগ</a>
+</nav>
+<main id="home">
+<h2>স্বাগতম TOPC Fashion-এ</h2>
+<p>আপনার পছন্দের পোশাক অর্ডার করুন সহজেই।</p>
+<section id="products">
+<h2>আমাদের পণ্য</h2>
+<div class="products">
+<div class="product">
+<div class="emoji">👕</div>
+<h3>ছেলেদের টি-শার্ট</h3>
+<p class="price">৳৫৫০</p>
+<button onclick="choose('ছেলেদের টি-শার্ট')">অর্ডার করুন</button>
+</div>
+<div class="product">
+<div class="emoji">👔</div>
+<h3>ছেলেদের শার্ট</h3>
+<p class="price">৳১২০০</p>
+<button onclick="choose('ছেলেদের শার্ট')">অর্ডার করুন</button>
+</div>
+<div class="product">
+<div class="emoji">👗</div>
+<h3>মেয়েদের ড্রেস</h3>
+<p class="price">৳৯৫০</p>
+<button onclick="choose('মেয়েদের ড্রেস')">অর্ডার করুন</button>
+</div>
+<div class="product">
+<div class="emoji">🧥</div>
+<h3>ফ্যাশন কালেকশন</h3>
+<p class="price">৳৮৫০</p>
+<button onclick="choose('ফ্যাশন কালেকশন')">অর্ডার করুন</button>
+</div>
+</div>
+</section>
+<section id="order">
+<h2>অর্ডার ফর্ম</h2>
+<form onsubmit="sendOrder(event)">
+<label>আপনার নাম</label>
+<input id="name" required placeholder="নাম লিখুন">
+<label>মোবাইল নম্বর</label>
+<input id="phone" required type="tel" placeholder="মোবাইল নম্বর">
+<label>পণ্য নির্বাচন</label>
+<select id="product" required>
+<option value="">পণ্য নির্বাচন করুন</option>
+<option>ছেলেদের টি-শার্ট</option>
+<option>ছেলেদের শার্ট</option>
+<option>মেয়েদের ড্রেস</option>
+<option>ফ্যাশন কালেকশন</option>
+</select>
+<label>সাইজ</label>
+<select id="size">
+<option>সাইজ নির্বাচন করুন</option>
+<option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+</select>
+<label>পরিমাণ</label>
+<input id="qty" type="number" min="1" value="1" required>
+<label>সম্পূর্ণ ঠিকানা</label>
+<textarea id="address" required placeholder="আপনার ঠিকানা লিখুন"></textarea>
+<label>যোগাযোগের পদ্ধতি</label>
+<select id="method">
+<option value="WhatsApp">WhatsApp</option>
+<option value="Call">ফোন কল</option>
+</select>
+<button type="submit">অর্ডার জমা দিন</button>
+</form>
+</section>
+<section id="contact" class="contact">
+<h2>যোগাযোগ</h2>
+<p>মোবাইল: 01780520876</p>
+<a href="tel:01780520876"><button>ফোন করুন</button></a>
+</section>
+</main>
+<footer>© 2026 TOPC Fashion | All Rights Reserved</footer>
+<script>
+function choose(p){
+document.getElementById('product').value=p;
+document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+function sendOrder(e){
+e.preventDefault();
+let msg="TOPC Fashion Order%0A"+
+"নাম: "+encodeURIComponent(document.getElementById('name').value)+"%0A"+
+"ফোন: "+encodeURIComponent(document.getElementById('phone').value)+"%0A"+
+"পণ্য: "+encodeURIComponent(document.getElementById('product').value)+"%0A"+
+"সাইজ: "+encodeURIComponent(document.getElementById('size').value)+"%0A"+
+"পরিমাণ: "+encodeURIComponent(document.getElementById('qty').value)+"%0A"+
+"ঠিকানা: "+encodeURIComponent(document.getElementById('address').value);
+if(document.getElementById('method').value==="WhatsApp"){
+window.open("https://wa.me/8801780520876?text="+msg,"_blank");
+}else{
+window.location.href="tel:01780520876";
+}
+}
+</script>
+</body>
+  </html>
