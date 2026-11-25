@@ -3,496 +3,508 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOPC Fashion</title>
+<title>TOPC Fashion | Premium Collection</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090909;color:#fff;font-family:Arial,sans-serif}
-header{background:#111;padding:18px;text-align:center;border-bottom:2px solid #d4af37}
-.logo{font-size:30px;font-weight:bold;color:#d4af37;letter-spacing:3px}
-nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;padding:15px}
-a{color:#d4af37;text-decoration:none}
-.hero{text-align:center;padding:55px 15px;background:linear-gradient(135deg,#171717,#30250c)}
-h1,h2{color:#d4af37}
+body{margin:0;background:#101010;color:#fff;font-family:Arial,sans-serif}
+header{background:#080808;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #b99842}
+.logo{font-size:25px;font-weight:bold;color:#d8b65c;letter-spacing:2px}
+button{cursor:pointer;border:0;padding:11px 17px;border-radius:6px;font-weight:bold}
+.gold{background:#d8b65c;color:#111}
+.dark{background:#292929;color:white;border:1px solid #777}
+.hero{text-align:center;padding:65px 15px;background:linear-gradient(120deg,#171717,#39301b)}
+.hero h1{font-size:38px;color:#e4c36b;margin:0 0 12px}
 .hero p{color:#ddd}
-.btn{display:inline-block;background:#d4af37;color:#111;padding:12px 20px;border:0;border-radius:7px;font-weight:bold;cursor:pointer;margin:5px}
-.section{padding:30px 15px;max-width:1000px;margin:auto}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.card{background:#171717;border:1px solid #66521b;border-radius:12px;padding:15px;text-align:center}
-.card img{width:100%;height:210px;object-fit:cover;border-radius:8px}
-.price{color:#e5c45a;font-size:20px;font-weight:bold}
-input,select,textarea{width:100%;padding:13px;margin:8px 0;background:#222;color:white;border:1px solid #806b2a;border-radius:7px}
-form{max-width:550px;margin:auto;background:#171717;padding:20px;border-radius:12px}
-label{color:#e5c45a}
-.info{background:#171717;padding:20px;border-radius:10px;line-height:1.9}
-footer{text-align:center;background:#111;padding:25px;border-top:2px solid #d4af37;color:#ccc}
-.hidden{display:none}
+section{padding:25px 5%}
+h2{color:#e2bf61}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0 25px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:16px}
+.card{background:#1d1d1d;border:1px solid #393939;border-radius:10px;overflow:hidden}
+.card img{width:100%;height:190px;object-fit:cover;background:#333}
+.cardbody{padding:12px}
+.card h3{margin:4px 0 8px;font-size:17px}
+.price{color:#e6c66c;font-weight:bold;margin:8px 0}
+.card button{width:100%;margin-top:6px}
+.panel{background:#1d1d1d;border:1px solid #5e4c24;border-radius:10px;padding:18px;margin:20px 0}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 13px;border-radius:6px;border:1px solid #555;background:#292929;color:white}
+label{color:#e4c36b}
+.hidden{display:none!important}
+.cartitem,.orderitem{background:#292929;padding:12px;margin:10px 0;border-radius:7px}
+footer{text-align:center;padding:25px;color:#aaa;border-top:1px solid #444}
+.small{color:#aaa;font-size:13px}
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">TOPC</div>
-<p>PREMIUM FASHION STORE</p>
+  <div class="logo">TOPC FASHION</div>
+  <button class="gold" onclick="showCart()">কার্ট 🛒 <span id="cartCount">0</span></button>
 </header>
 
-<nav>
-<a href="#home">হোম</a>
-<a href="#products">পণ্য</a>
-<a href="#membership">মেম্বারশিপ</a>
-<a href="#order">অর্ডার</a>
-</nav>
+<div class="hero">
+  <h1>STYLE YOUR LIFE</h1>
+  <p>আপনার পছন্দের পোশাক এখন এক জায়গায়</p>
+  <button class="gold" onclick="document.getElementById('shop').scrollIntoView()">SHOP NOW</button>
+</div>
 
-<section class="hero" id="home">
-<h1>স্বাগতম TOPC Fashion-এ</h1>
-<p>আপনার পছন্দের পোশাক এখন এক জায়গায়</p>
-<a class="btn" href="#products">পণ্য দেখুন</a>
-<a class="btn" href="#order">অর্ডার করুন</a>
+<section id="shop">
+  <h2>OUR COLLECTION</h2>
+  <div class="categories">
+    <button class="gold" onclick="filterProducts('সব')">সব পণ্য</button>
+    <button class="dark" onclick="filterProducts('পুরুষ')">পুরুষ</button>
+    <button class="dark" onclick="filterProducts('নারী')">নারী</button>
+  </div>
+  <div id="products" class="products">পণ্য লোড হচ্ছে...</div>
 </section>
 
-<section class="section" id="products">
-<h2>আমাদের কালেকশন</h2>
-<input id="search" type="search" placeholder="পণ্যের নাম লিখে খুঁজুন..." oninput="searchProducts()">
+<section id="cartSection" class="hidden">
+  <div class="panel">
+    <h2>আপনার কার্ট</h2>
+    <div id="cartItems"></div>
+    <h3 id="cartTotal">মোট: ০ টাকা</h3>
 
-<div class="products" id="productList">
+    <h2>অর্ডার ফর্ম</h2>
+    <label>আপনার নাম</label>
+    <input id="customerName" placeholder="আপনার নাম লিখুন">
 
-<div class="card" data-name="টি শার্ট t shirt">
-<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600" alt="টি শার্ট">
-<h3>Men's T-Shirt</h3>
-<p class="price">৳৪০০</p>
-<button class="btn" onclick="chooseProduct('Men T-Shirt',400)">অর্ডার করুন</button>
-</div>
+    <label>মোবাইল নম্বর</label>
+    <input id="customerPhone" type="tel" placeholder="01XXXXXXXXX">
 
-<div class="card" data-name="শার্ট shirt">
-<img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600" alt="শার্ট">
-<h3>Men's Shirt</h3>
-<p class="price">৳৬৫০</p>
-<button class="btn" onclick="chooseProduct('Men Shirt',650)">অর্ডার করুন</button>
-</div>
+    <label>সম্পূর্ণ ঠিকানা</label>
+    <textarea id="customerAddress" placeholder="আপনার ঠিকানা লিখুন"></textarea>
 
-<div class="card" data-name="হুডি hoodie">
-<img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600" alt="হুডি">
-<h3>Men's Hoodie</h3>
-<p class="price">৳৬০০</p>
-<button class="btn" onclick="chooseProduct('Men Hoodie',600)">অর্ডার করুন</button>
-</div>
-
-<div class="card" data-name="থ্রি পিস three piece">
-<img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600" alt="থ্রি পিস">
-<h3>Women's Three Piece</h3>
-<p class="price">৳৭০০</p>
-<button class="btn" onclick="chooseProduct('Women Three Piece',700)">অর্ডার করুন</button>
-</div>
-
-</div>
+    <button class="gold" onclick="placeOrder()">অর্ডার নিশ্চিত করুন</button>
+    <button class="dark" onclick="closeCart()">বন্ধ করুন</button>
+    <p id="orderMessage"></p>
+  </div>
 </section>
 
-<section class="section" id="membership">
-<h2>TOPC GOLD MEMBERSHIP</h2>
-<div class="info">
-<h3>মেম্বারশিপ ফি: ৳৫০</h3>
-<p>সুবিধা: ১০% ছাড়</p>
-<p>মেয়াদ: চালু হওয়ার পর ২৪ ঘণ্টা</p>
-<p>পেমেন্ট যাচাই করে বিক্রেতা কার্ড চালু করবেন।</p>
-<p>বিকাশ: 01780520876</p>
-<p>নগদ: 01925564862</p>
-</div>
+<section>
+  <div class="panel">
+    <h2>ADMIN LOGIN</h2>
+    <div id="loginBox">
+      <input id="adminEmail" type="email" placeholder="Admin Email">
+      <input id="adminPassword" type="password" placeholder="Password">
+      <button class="gold" onclick="adminLogin()">Admin Login</button>
+      <p id="loginMessage" class="small"></p>
+    </div>
 
-<form id="memberForm">
-<h3>মেম্বারশিপ আবেদন</h3>
-<label>আপনার নাম</label>
-<input id="memberName" required placeholder="নাম লিখুন">
-<label>মোবাইল নম্বর</label>
-<input id="memberPhone" required type="tel" placeholder="মোবাইল নম্বর">
-<label>পেমেন্ট মাধ্যম</label>
-<select id="payment">
-<option value="বিকাশ">বিকাশ</option>
-<option value="নগদ">নগদ</option>
-</select>
-<label>ট্রানজেকশন আইডি</label>
-<input id="trx" required placeholder="Transaction ID">
-<button class="btn" type="submit">আবেদন পাঠান</button>
-</form>
-</section>
+    <div id="adminPanel" class="hidden">
+      <h2>ADMIN DASHBOARD</h2>
+      <p id="adminWelcome" class="small"></p>
+      <button class="dark" onclick="adminLogout()">Logout</button>
 
-<section class="section" id="order">
-<h2>অনলাইন অর্ডার</h2>
-<form id="orderForm">
-<label>পণ্যের নাম</label>
-<select id="product" required>
-<option value="">পণ্য নির্বাচন করুন</option>
-<option value="Men T-Shirt" data-price="400">Men's T-Shirt - ৳৪০০</option>
-<option value="Men Shirt" data-price="650">Men's Shirt - ৳৬৫০</option>
-<option value="Men Hoodie" data-price="600">Men's Hoodie - ৳৬০০</option>
-<option value="Women Three Piece" data-price="700">Women's Three Piece - ৳৭০০</option>
-</select>
+      <hr>
 
-<label>পরিমাণ</label>
-<input id="quantity" type="number" min="1" value="1" required>
-<p id="total">মোট: ৳০</p>
+      <h2>নতুন পণ্য যোগ করুন</h2>
+      <label>পণ্যের নাম</label>
+      <input id="pName" placeholder="যেমন: Premium Shirt">
 
-<label>আপনার নাম</label>
-<input id="customerName" required placeholder="আপনার নাম">
+      <label>দাম (টাকা)</label>
+      <input id="pPrice" type="number" min="1" placeholder="500">
 
-<label>মোবাইল নম্বর</label>
-<input id="customerPhone" required type="tel" placeholder="মোবাইল নম্বর">
+      <label>পণ্যের ছবি URL</label>
+      <input id="pImage" placeholder="https://example.com/image.jpg">
 
-<label>সম্পূর্ণ ঠিকানা</label>
-<textarea id="address" required placeholder="আপনার ঠিকানা লিখুন"></textarea>
+      <label>ক্যাটাগরি</label>
+      <select id="pCategory">
+        <option value="পুরুষ">পুরুষ</option>
+        <option value="নারী">নারী</option>
+      </select>
 
-<button class="btn" type="submit">WhatsApp-এ অর্ডার পাঠান</button>
-</form>
-</section>
+      <button class="gold" onclick="addProduct()">পণ্য যোগ করুন</button>
+      <p id="productMessage" class="small"></p>
 
-<section class="section">
-<h2>যোগাযোগ</h2>
-<div class="info">
-<p>ফোন: 01780520876</p>
-<p>বিকাশ: 01780520876</p>
-<p>নগদ: 01925564862</p>
-<a class="btn" href="tel:01780520876">কল করুন</a>
-<a class="btn" href="https://wa.me/8801780520876" target="_blank">WhatsApp</a>
-</div>
+      <hr>
+      <h2>পণ্য পরিচালনা</h2>
+      <div id="manageProducts"></div>
+
+      <hr>
+      <h2>📥 অর্ডার ইনবক্স</h2>
+      <div id="orders">অর্ডার লোড হচ্ছে...</div>
+    </div>
+  </div>
 </section>
 
 <footer>
-<h3>TOPC FASHION</h3>
-<p>ধন্যবাদ আমাদের সঙ্গে থাকার জন্য।</p>
-<p>© 2026 TOPC Fashion</p>
+  <h3 style="color:#d8b65c">TOPC FASHION</h3>
+  <p>Premium Fashion Collection</p>
+  <p class="small">© 2026 TOPC Fashion. All Rights Reserved.</p>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
 <script>
-const WHATSAPP = "8801780520876";
+// FIREBASE CONFIGURATION
+const firebaseConfig = {
+  apiKey: "AIzaSyC6k9jPobVGg_-h2O_2ib1XU55ym8rSStk",
+  authDomain: "topc-fashion.firebaseapp.com",
+  projectId: "topc-fashion",
+  storageBucket: "topc-fashion.firebasestorage.app",
+  messagingSenderId: "557452385895",
+  appId: "1:557452385895:web:4b3487846cfb1b7f067ec2",
+  measurementId: "G-4QJB1CHL8Z"
+};
 
-function chooseProduct(name,price){
-document.getElementById("product").value=name;
-document.getElementById("quantity").value=1;
-updateTotal();
-document.getElementById("order").scrollIntoView({behavior:"smooth"});
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const ADMIN_UID = "V3AHyVzFTMQUZFwh7UGJQ32EajI2";
+
+let allProducts = [];
+let cart = [];
+let currentFilter = "সব";
+let isAdmin = false;
+
+function money(n){
+  return Number(n || 0).toLocaleString("en-BD") + " টাকা";
 }
 
-function updateTotal(){
-const select=document.getElementById("product");
-const option=select.options[select.selectedIndex];
-const price=Number(option.dataset.price||0);
-const qty=Math.max(1,Number(document.getElementById("quantity").value||1));
-document.getElementById("total").textContent="মোট: ৳"+(price*qty);
+function safeText(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  }[c]));
 }
 
-document.getElementById("product").addEventListener("change",updateTotal);
-document.getElementById("quantity").addEventListener("input",updateTotal);
-
-function searchProducts(){
-const q=document.getElementById("search").value.toLowerCase();
-document.querySelectorAll(".card").forEach(card=>{
-card.style.display=card.dataset.name.includes(q)?"block":"none";
+// PRODUCTS
+db.collection("products").onSnapshot(snapshot => {
+  allProducts = snapshot.docs.map(doc => ({
+    id:doc.id, ...doc.data()
+  }));
+  renderProducts();
+  if(isAdmin) renderManageProducts();
+}, error => {
+  document.getElementById("products").textContent =
+    "পণ্য লোড হয়নি: " + error.message;
 });
+
+function renderProducts(){
+  const list = allProducts.filter(p =>
+    currentFilter === "সব" || p.category === currentFilter
+  );
+
+  const box = document.getElementById("products");
+
+  if(!list.length){
+    box.innerHTML = "<p>এখনো কোনো পণ্য যোগ করা হয়নি।</p>";
+    return;
+  }
+
+  box.innerHTML = list.map(p => `
+    <div class="card">
+      <img src="${safeText(p.image || "")}"
+        alt="${safeText(p.name)}"
+        onerror="this.src='https://placehold.co/400x400/222/gold?text=TOPC+Fashion'">
+      <div class="cardbody">
+        <h3>${safeText(p.name)}</h3>
+        <div class="small">${safeText(p.category || "")}</div>
+        <div class="price">${money(p.price)}</div>
+        <button class="gold" onclick="addToCart('${p.id}')">
+          কার্টে যোগ করুন
+        </button>
+      </div>
+    </div>
+  `).join("");
 }
 
-document.getElementById("orderForm").addEventListener("submit",function(e){
-e.preventDefault();
-const product=document.getElementById("product").value;
-const qty=Number(document.getElementById("quantity").value);
-const option=document.getElementById("product").selectedOptions[0];
-const price=Number(option.dataset.price||0);
-const total=price*qty;
-const name=document.getElementById("customerName").value;
-const phone=document.getElementById("customerPhone").value;
-const address=document.getElementById("address").value;
+function filterProducts(category){
+  currentFilter = category;
+  renderProducts();
+}
 
-const message=`TOPC Fashion Order\nপণ্য: ${product}\nপরিমাণ: ${qty}\nমোট: ৳${total}\nনাম: ${name}\nফোন: ${phone}\nঠিকানা: ${address}`;
-window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(message),"_blank");
+// CART
+function addToCart(id){
+  const product = allProducts.find(p => p.id === id);
+  if(!product) return alert("পণ্য পাওয়া যায়নি");
+
+  const found = cart.find(p => p.id === id);
+  if(found) found.qty++;
+  else cart.push({...product, qty:1});
+
+  updateCart();
+  alert("কার্টে যোগ হয়েছে");
+}
+
+function updateCart(){
+  document.getElementById("cartCount").textContent =
+    cart.reduce((s,p)=>s+p.qty,0);
+
+  document.getElementById("cartItems").innerHTML =
+    cart.map(p => `
+      <div class="cartitem">
+        ${safeText(p.name)} × ${p.qty}
+        — ${money(Number(p.price)*p.qty)}
+        <button class="dark" onclick="removeCart('${p.id}')">বাদ দিন</button>
+      </div>
+    `).join("");
+
+  const total = cart.reduce((s,p)=>s+Number(p.price)*p.qty,0);
+  document.getElementById("cartTotal").textContent = "মোট: " + money(total);
+}
+
+function removeCart(id){
+  cart = cart.filter(p=>p.id!==id);
+  updateCart();
+}
+
+function showCart(){
+  document.getElementById("cartSection").classList.remove("hidden");
+  updateCart();
+  document.getElementById("cartSection").scrollIntoView();
+}
+
+function closeCart(){
+  document.getElementById("cartSection").classList.add("hidden");
+}
+
+// PLACE ORDER
+async function placeOrder(){
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+
+  if(!cart.length) return alert("আগে কার্টে পণ্য যোগ করুন");
+  if(!name || !phone || !address)
+    return alert("সব তথ্য পূরণ করুন");
+
+  if(phone.length < 10)
+    return alert("সঠিক মোবাইল নম্বর লিখুন");
+
+  const items = cart.map(p=>({
+    productId:p.id,
+    name:p.name,
+    price:Number(p.price),
+    quantity:p.qty
+  }));
+
+  const total = items.reduce((s,p)=>s+p.price*p.quantity,0);
+
+  try{
+    await db.collection("orders").add({
+      customerName:name,
+      phone:phone,
+      address:address,
+      items:items,
+      total:total,
+      status:"pending",
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    cart = [];
+    updateCart();
+
+    document.getElementById("customerName").value="";
+    document.getElementById("customerPhone").value="";
+    document.getElementById("customerAddress").value="";
+    document.getElementById("orderMessage").textContent =
+      "আপনার অর্ডার গ্রহণ করা হয়েছে। ধন্যবাদ!";
+
+    alert("অর্ডার সফলভাবে জমা হয়েছে!");
+  }catch(error){
+    alert("অর্ডার জমা হয়নি: " + error.message);
+  }
+}
+
+// ADMIN LOGIN
+async function adminLogin(){
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value;
+
+  if(!email || !password)
+    return alert("ইমেইল ও পাসওয়ার্ড দিন");
+
+  try{
+    await auth.signInWithEmailAndPassword(email,password);
+  }catch(error){
+    document.getElementById("loginMessage").textContent =
+      "Login Error: " + error.message;
+  }
+}
+
+auth.onAuthStateChanged(user=>{
+  if(user && user.uid === ADMIN_UID){
+    isAdmin = true;
+    document.getElementById("loginBox").classList.add("hidden");
+    document.getElementById("adminPanel").classList.remove("hidden");
+    document.getElementById("adminWelcome").textContent =
+      "Admin হিসেবে লগইন করা হয়েছে: " + user.email;
+    loadOrders();
+    renderManageProducts();
+  }else{
+    isAdmin = false;
+    document.getElementById("loginBox").classList.remove("hidden");
+    document.getElementById("adminPanel").classList.add("hidden");
+
+    if(user){
+      auth.signOut();
+      alert("এই অ্যাকাউন্টের Admin অনুমতি নেই");
+    }
+  }
 });
 
-document.getElementById("memberForm").addEventListener("submit",function(e){
-e.preventDefault();
-const name=document.getElementById("memberName").value;
-const phone=document.getElementById("memberPhone").value;
-const payment=document.getElementById("payment").value;
-const trx=document.getElementById("trx").value;
-const message=`TOPC Membership Application\nনাম: ${name}\nফোন: ${phone}\nপেমেন্ট: ${payment}\nট্রানজেকশন আইডি: ${trx}\nফি: ৳৫০\nদয়া করে পেমেন্ট যাচাই করে মেম্বারশিপ চালু করুন।`;
-window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(message),"_blank");
-});
+async function adminLogout(){
+  await auth.signOut();
+}
+
+// ADD PRODUCT
+async function addProduct(){
+  if(!isAdmin) return alert("Admin Login করুন");
+
+  const name = document.getElementById("pName").value.trim();
+  const price = Number(document.getElementById("pPrice").value);
+  const image = document.getElementById("pImage").value.trim();
+  const category = document.getElementById("pCategory").value;
+
+  if(!name || !price || price < 1 || !image)
+    return alert("সব তথ্য সঠিকভাবে পূরণ করুন");
+
+  try{
+    await db.collection("products").add({
+      name:name,
+      price:price,
+      image:image,
+      category:category
+    });
+
+    document.getElementById("pName").value="";
+    document.getElementById("pPrice").value="";
+    document.getElementById("pImage").value="";
+    document.getElementById("productMessage").textContent =
+      "পণ্য সফলভাবে যোগ হয়েছে!";
+  }catch(error){
+    alert("পণ্য যোগ হয়নি: "+error.message);
+  }
+}
+
+// MANAGE PRODUCTS
+function renderManageProducts(){
+  if(!isAdmin) return;
+
+  const box = document.getElementById("manageProducts");
+
+  box.innerHTML = allProducts.map(p=>`
+    <div class="cartitem">
+      <b>${safeText(p.name)}</b> — ${money(p.price)}
+      <br><br>
+      <button class="dark" onclick="editProduct('${p.id}')">দাম পরিবর্তন</button>
+      <button class="dark" onclick="deleteProduct('${p.id}')">মুছুন</button>
+    </div>
+  `).join("") || "কোনো পণ্য নেই";
+}
+
+async function editProduct(id){
+  if(!isAdmin) return;
+
+  const p = allProducts.find(x=>x.id===id);
+  if(!p) return;
+
+  const newPrice = prompt("নতুন দাম লিখুন",p.price);
+  if(newPrice===null) return;
+
+  const price = Number(newPrice);
+  if(!Number.isFinite(price) || price<1)
+    return alert("সঠিক দাম লিখুন");
+
+  try{
+    await db.collection("products").doc(id).update({price});
+    alert("দাম পরিবর্তন হয়েছে");
+  }catch(error){
+    alert(error.message);
+  }
+}
+
+async function deleteProduct(id){
+  if(!isAdmin) return;
+  if(!confirm("আপনি কি পণ্যটি মুছতে চান?")) return;
+
+  try{
+    await db.collection("products").doc(id).delete();
+    alert("পণ্য মুছে ফেলা হয়েছে");
+  }catch(error){
+    alert(error.message);
+  }
+}
+
+// ADMIN ORDER INBOX
+let orderUnsubscribe = null;
+
+function loadOrders(){
+  if(!isAdmin) return;
+
+  if(orderUnsubscribe) orderUnsubscribe();
+
+  orderUnsubscribe = db.collection("orders")
+    .orderBy("createdAt","desc")
+    .onSnapshot(snapshot=>{
+      const box = document.getElementById("orders");
+
+      if(snapshot.empty){
+        box.innerHTML = "এখনো কোনো অর্ডার আসেনি।";
+        return;
+      }
+
+      box.innerHTML = snapshot.docs.map(doc=>{
+        const o = doc.data();
+
+        const items = (o.items || []).map(p =>
+          `${safeText(p.name)} × ${p.quantity}`
+        ).join(", ");
+
+        return `
+          <div class="orderitem">
+            <h3 style="color:#e4c36b">অর্ডার #${doc.id.slice(0,7)}</h3>
+            <p>নাম: ${safeText(o.customerName)}</p>
+            <p>ফোন: ${safeText(o.phone)}</p>
+            <p>ঠিকানা: ${safeText(o.address)}</p>
+            <p>পণ্য: ${items}</p>
+            <p>মোট: ${money(o.total)}</p>
+            <p>স্ট্যাটাস: <b>${safeText(o.status)}</b></p>
+
+            <select id="status-${doc.id}">
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+
+            <button class="gold" onclick="changeStatus('${doc.id}')">
+              স্ট্যাটাস আপডেট
+            </button>
+          </div>
+        `;
+      }).join("");
+
+      snapshot.docs.forEach(doc=>{
+        const el = document.getElementById("status-"+doc.id);
+        if(el) el.value = doc.data().status || "pending";
+      });
+
+    },error=>{
+      document.getElementById("orders").textContent =
+        "অর্ডার লোড হয়নি: "+error.message;
+    });
+}
+
+async function changeStatus(id){
+  if(!isAdmin) return;
+
+  const status = document.getElementById("status-"+id).value;
+
+  try{
+    await db.collection("orders").doc(id).update({status});
+    alert("অর্ডারের স্ট্যাটাস পরিবর্তন হয়েছে");
+  }catch(error){
+    alert("আপডেট হয়নি: "+error.message);
+  }
+}
+
 </script>
-
 </body>
   </html>
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOPC Fashion | Premium Store</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#080808;color:#fff;font-family:Arial,sans-serif}
-:root{--gold:#d8b44c;--gold2:#f7df91;--panel:#151515}
-header{padding:20px;text-align:center;background:#101010;border-bottom:1px solid var(--gold)}
-.logo{font-size:34px;font-weight:900;letter-spacing:5px;color:var(--gold)}
-header p{font-size:11px;letter-spacing:4px;color:#aaa;margin:7px}
-nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding:16px;background:#111;position:sticky;top:0;z-index:5}
-nav a{color:var(--gold2);text-decoration:none;font-size:14px}
-a{color:var(--gold)}
-.hero{text-align:center;padding:65px 15px;background:radial-gradient(circle at top,#493817,#17130b 48%,#080808)}
-.hero h1{font-size:32px;color:var(--gold2)}
-.hero p{color:#ddd;line-height:1.8}
-.section{max-width:1050px;margin:auto;padding:35px 16px}
-h2{color:var(--gold);text-align:center;margin:0 0 25px}
-.btn{display:inline-block;border:0;border-radius:7px;padding:12px 19px;background:linear-gradient(120deg,#a77a19,#f4d778);color:#111;font-weight:bold;text-decoration:none;cursor:pointer;margin:5px}
-.btn:hover{filter:brightness(1.12)}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.product-card{background:linear-gradient(145deg,#1b1b1b,#101010);border:1px solid #594719;border-radius:15px;padding:13px;text-align:center;transition:.25s}
-.product-card:hover{transform:translateY(-5px);border-color:var(--gold)}
-.product-card img{width:100%;height:230px;object-fit:cover;border-radius:10px;background:#222}
-.product-card h3{color:#fff}
-.price{color:var(--gold2);font-size:22px;font-weight:bold}
-input,select,textarea{width:100%;padding:13px;margin:8px 0 15px;background:#202020;color:white;border:1px solid #705b27;border-radius:7px;font-size:15px}
-label{color:var(--gold2);font-size:14px}
-form{max-width:570px;margin:20px auto;background:#151515;padding:22px;border:1px solid #51421f;border-radius:14px}
-.info{background:#151515;border:1px solid #55451f;padding:20px;border-radius:12px;line-height:1.9}
-#total{color:var(--gold2);font-size:20px;font-weight:bold}
-.member-wrap{max-width:650px;margin:auto}
-.member-card{position:relative;overflow:hidden;min-height:240px;padding:25px;border-radius:18px;border:2px solid #d8b44c;background:linear-gradient(125deg,#080808 5%,#28200e 55%,#090909);box-shadow:0 10px 35px #000;text-align:left}
-.member-card:before{content:"";position:absolute;width:190px;height:190px;border:1px solid #b99438;border-radius:50%;right:-55px;top:-65px;box-shadow:0 0 0 16px #d8b44c12,0 0 0 35px #d8b44c0c}
-.card-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.card-brand{font-size:23px;font-weight:900;letter-spacing:3px;color:var(--gold2)}
-.gold-chip{border:1px solid var(--gold);padding:7px 10px;border-radius:7px;color:var(--gold2);font-size:11px}
-.card-label{color:#c9b36c;font-size:10px;letter-spacing:3px;margin-top:25px}
-.card-name{font-size:23px;color:white;font-weight:bold;margin:8px 0 18px;overflow-wrap:anywhere}
-.card-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.card-small{font-size:10px;color:#b9a66c;letter-spacing:1px}
-.card-value{font-size:13px;color:#fff;margin-top:5px}
-.preview-note{text-align:center;color:#c9b36c;font-size:12px;margin:13px 0 25px}
-footer{text-align:center;padding:28px;background:#111;border-top:1px solid var(--gold);color:#aaa;line-height:1.8}
-@media(max-width:480px){.hero h1{font-size:25px}.member-card{padding:19px;min-height:220px}.card-brand{font-size:19px}}
-</style>
-</head>
-<body>
-
-<header>
-  <div class="logo">TOPC</div>
-  <p>PREMIUM FASHION STORE</p>
-</header>
-
-<nav>
-  <a href="#home">হোম</a>
-  <a href="#membership">GOLD CARD</a>
-  <a href="#products">পণ্য</a>
-  <a href="#order">অর্ডার</a>
-</nav>
-
-<section class="hero" id="home">
-  <h1>স্বাগতম TOPC Fashion-এ</h1>
-  <p>স্টাইল হোক আপনার পছন্দের পরিচয়<br>প্রিমিয়াম কালেকশন, সাশ্রয়ী দামে</p>
-  <a class="btn" href="#membership">GOLD CARD দেখুন</a>
-  <a class="btn" href="#products">কালেকশন দেখুন</a>
-</section>
-
-<section class="section" id="membership">
-  <h2>✦ TOPC GOLD MEMBERSHIP ✦</h2>
-  <div class="member-wrap">
-    <div class="member-card">
-      <div class="card-top">
-        <div class="card-brand">TOPC</div>
-        <div class="gold-chip">✦ GOLD MEMBER</div>
-      </div>
-      <div class="card-label">MEMBERSHIP CARD PREVIEW</div>
-      <div class="card-name" id="previewName">YOUR NAME</div>
-      <div class="card-bottom">
-        <div>
-          <div class="card-small">CARD NUMBER</div>
-          <div class="card-value">TOPC-PREVIEW</div>
-        </div>
-        <div>
-          <div class="card-small">DISCOUNT</div>
-          <div class="card-value">10% OFF</div>
-        </div>
-        <div>
-          <div class="card-small">VALIDITY</div>
-          <div class="card-value">24 HOURS*</div>
-        </div>
-      </div>
-    </div>
-    <p class="preview-note">এটি নমুনা কার্ড — সদস্যপদ চালু হওয়ার আগে এটি সক্রিয় নয়।</p>
-  </div>
-
-  <div class="info">
-    <h3 style="color:#e8c75e">GOLD Membership সুবিধা</h3>
-    <p>✦ মেম্বারশিপ ফি: ৳৫০</p>
-    <p>✦ কেনাকাটায় ১০% ছাড়</p>
-    <p>✦ মেয়াদ: অনুমোদনের পর ২৪ ঘণ্টা</p>
-    <p>✦ পেমেন্ট যাচাই করে বিক্রেতা সদস্যপদ চালু করবেন।</p>
-    <p>বিকাশ: 01780520876</p>
-    <p>নগদ: 01925564862</p>
-  </div>
-
-  <form id="memberForm">
-    <h3 style="color:#d8b44c;text-align:center">মেম্বারশিপ আবেদন</h3>
-    <label>আপনার নাম</label>
-    <input id="memberName" required placeholder="আপনার নাম লিখুন">
-    <label>মোবাইল নম্বর</label>
-    <input id="memberPhone" required type="tel" placeholder="মোবাইল নম্বর">
-    <label>পেমেন্ট মাধ্যম</label>
-    <select id="payment">
-      <option value="বিকাশ">বিকাশ</option>
-      <option value="নগদ">নগদ</option>
-    </select>
-    <label>ট্রানজেকশন আইডি</label>
-    <input id="trx" required placeholder="Transaction ID লিখুন">
-    <button class="btn" type="submit">আবেদন পাঠান</button>
-  </form>
-</section>
-
-<section class="section" id="products">
-  <h2>আমাদের প্রিমিয়াম কালেকশন</h2>
-  <input id="search" type="search" placeholder="পণ্যের নাম লিখে খুঁজুন...">
-
-  <div class="products">
-    <div class="product-card" data-name="t shirt টি শার্ট">
-      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600" alt="T Shirt">
-      <h3>Men's T-Shirt</h3>
-      <p class="price">৳৪০০</p>
-      <button class="btn" onclick="chooseProduct('Men T-Shirt',400)">অর্ডার করুন</button>
-    </div>
-
-    <div class="product-card" data-name="shirt শার্ট">
-      <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600" alt="Shirt">
-      <h3>Men's Shirt</h3>
-      <p class="price">৳৬৫০</p>
-      <button class="btn" onclick="chooseProduct('Men Shirt',650)">অর্ডার করুন</button>
-    </div>
-
-    <div class="product-card" data-name="hoodie হুডি">
-      <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600" alt="Hoodie">
-      <h3>Men's Hoodie</h3>
-      <p class="price">৳৬০০</p>
-      <button class="btn" onclick="chooseProduct('Men Hoodie',600)">অর্ডার করুন</button>
-    </div>
-
-    <div class="product-card" data-name="three piece থ্রি পিস">
-      <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600" alt="Three Piece">
-      <h3>Women's Three Piece</h3>
-      <p class="price">৳৭০০</p>
-      <button class="btn" onclick="chooseProduct('Women Three Piece',700)">অর্ডার করুন</button>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="order">
-  <h2>অনলাইন অর্ডার</h2>
-  <form id="orderForm">
-    <label>পণ্য নির্বাচন করুন</label>
-    <select id="product" required>
-      <option value="">পণ্য নির্বাচন করুন</option>
-      <option value="Men T-Shirt" data-price="400">Men's T-Shirt - ৳৪০০</option>
-      <option value="Men Shirt" data-price="650">Men's Shirt - ৳৬৫০</option>
-      <option value="Men Hoodie" data-price="600">Men's Hoodie - ৳৬০০</option>
-      <option value="Women Three Piece" data-price="700">Women's Three Piece - ৳৭০০</option>
-    </select>
-
-    <label>পরিমাণ</label>
-    <input id="quantity" type="number" min="1" value="1" required>
-    <p id="total">মোট: ৳০</p>
-
-    <label>আপনার নাম</label>
-    <input id="customerName" required placeholder="আপনার নাম">
-    <label>মোবাইল নম্বর</label>
-    <input id="customerPhone" required type="tel" placeholder="মোবাইল নম্বর">
-    <label>সম্পূর্ণ ঠিকানা</label>
-    <textarea id="address" required placeholder="আপনার ঠিকানা লিখুন"></textarea>
-
-    <button class="btn" type="submit">WhatsApp-এ অর্ডার পাঠান</button>
-  </form>
-</section>
-
-<section class="section">
-  <h2>যোগাযোগ করুন</h2>
-  <div class="info">
-    <p>ফোন: 01780520876</p>
-    <p>বিকাশ: 01780520876</p>
-    <p>নগদ: 01925564862</p>
-    <a class="btn" href="tel:01780520876">কল করুন</a>
-    <a class="btn" href="https://wa.me/8801780520876" target="_blank">WhatsApp</a>
-  </div>
-</section>
-
-<footer>
-  <h3 style="color:#d8b44c">TOPC FASHION</h3>
-  আপনার পছন্দ, আমাদের দায়িত্ব।<br>
-  © 2026 TOPC Fashion
-</footer>
-
-<script>
-const WHATSAPP = "8801780520876";
-
-function chooseProduct(name, price) {
-  const select = document.getElementById("product");
-  select.value = name;
-  document.getElementById("quantity").value = 1;
-  updateTotal();
-  document.getElementById("order").scrollIntoView({behavior:"smooth"});
-}
-
-function updateTotal() {
-  const select = document.getElementById("product");
-  const option = select.options[select.selectedIndex];
-  const price = Number(option.dataset.price || 0);
-  const qty = Math.max(1, Number(document.getElementById("quantity").value || 1));
-  document.getElementById("total").textContent = "মোট: ৳" + (price * qty);
-}
-
-document.getElementById("product").addEventListener("change", updateTotal);
-document.getElementById("quantity").addEventListener("input", updateTotal);
-
-document.getElementById("search").addEventListener("input", function() {
-  const q = this.value.toLowerCase().trim();
-  document.querySelectorAll(".product-card").forEach(card => {
-    card.style.display = card.dataset.name.toLowerCase().includes(q) ? "" : "none";
-  });
-});
-
-document.getElementById("memberName").addEventListener("input", function() {
-  document.getElementById("previewName").textContent = this.value.trim() || "YOUR NAME";
-});
-
-document.getElementById("orderForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const product = document.getElementById("product").value;
-  const qty = Number(document.getElementById("quantity").value);
-  const option = document.getElementById("product").selectedOptions[0];
-  const total = Number(option.dataset.price || 0) * qty;
-  const name = document.getElementById("customerName").value;
-  const phone = document.getElementById("customerPhone").value;
-  const address = document.getElementById("address").value;
-
-  const message = `TOPC Fashion Order
-পণ্য: ${product}
-পরিমাণ: ${qty}
-মোট: ৳${total}
-নাম: ${name}
-ফোন: ${phone}
-ঠিকানা: ${address}`;
-
-  window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message), "_blank");
-});
-
-document.getElementById("memberForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const name = document.getElementById("memberName").value;
-  const phone = document.getElementById("memberPhone").value;
-  const payment = document.getElementById("payment").value;
-  const trx = document.getElementById("trx").value;
-
-  const message = `TOPC Membership Application
-নাম: ${name}
-ফোন: ${phone}
-পেমেন্ট: ${payment}
-ট্রানজেকশন আইডি: ${trx}
-ফি: ৳৫০
-দয়া করে পেমেন্ট যাচাই করে সদস্যপদ চালু করুন।`;
-
-  window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message), "_blank");
-});
-</script>
-</body>
-    </html>
